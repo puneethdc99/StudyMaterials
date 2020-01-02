@@ -7,7 +7,11 @@ https://github.com/logisticinfotech/elasticsearch-reactjs-crud
 https://github.com/appbaseio-apps/yelpSearch-App
 https://codeburst.io/how-to-build-a-yelp-like-search-app-using-react-and-elasticsearch-36a432bf6f92
 
+create-react-app [Project Name] --scripts-version 2.0.3
 
+
+
+-----------------------------------------------------------------------------------------------------------
  getAlltheIndex = () => {
     fetch("http://34.89.89.247:9002/_aliases?pretty=true")
       .then(res => res.json())
@@ -23,3 +27,4 @@ https://codeburst.io/how-to-build-a-yelp-like-search-app-using-react-and-elastic
   getJson = () => {
     console.log(Object.keys(this.state.items).toString());
   };
+------------------------------------------------------------------------------------------------------------
