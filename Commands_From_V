@@ -1,0 +1,183 @@
+Run serilog app :
+
+sudo docker run --network host serilogapp
+
+
+Run syslog-ng :
+
+sudo docker run -it  --rm --network bridge -p 514:514/udp -p 601:601 --hostname mysyslog-ng -v "$(pwd)/syslog-ng.conf":/etc/syslog-ng/syslog-ng.conf -v "$(pwd)/data":/var/log balabit/syslog-ng:latest -edv
+
+
+
+
+openssl x509 -in mycert.crt -out mycert.pem -outform PEM
+
+
+proxy : 
+1. sudo nano /etc/environment---
+2. sudo nano /etc/apt/apt.conf---
+3. To put dockers behind proxy : https://stackoverflow.com/questions/26550360/docker-ubuntu-behind-proxy
+
+
+
+
+
+sudo docker run -it -d  --rm -p 514:514/udp -p 601:601 -v "$(pwd)/syslog-ng.conf":/etc/syslog-ng/syslog-ng.conf -v "$(pwd)/data":/var/log --name syslog-ng2  balabit/syslog-ng:latest -edv
+
+
+Run logstash docker :
+
+
+docker run -d --rm -it -v /etc/sampleconf/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf   docker.elastic.co/logstash/logstash:7.3.2
+
+
+Run elasticsearch dockers :
+
+
+sudo docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -v /etc/sampleconf/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+
+sudo docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node"  -v /etc/sampleconf/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml docker.elastic.co/elasticsearch/elasticsearch:7.3.2
+
+
+
+
+
+ sudo tcpdump -A -i any dst port 9002
+
+
+
+------Install syslog -----
+
+apt-get -y install rsyslog
+
+
+
+
+---------------
+
+
+mosquitto_pub -h localhost -t etc -m "test" -d --cafile certs/ca.crt -p 8883 --insecure
+
+sudo mosquitto_sub -h localhost -t etc
+
+
+
+
+abb@administrator-virtual-machine:~/Documents/new$ mosquitto_pub -h localhost -t etc -m "test22" -d --cafile ca.crt --cert client.crt --key client.key -p 8883 
+
+
+
+/etc/mosquitto
+
+/home/abb/Documents/certificates
+
+sudo cp /home/abb/Documents/certificates/server.key /etc/mosquitto/certs
+
+sudo cp /home/abb/Documents/certificates/client.crt /etc/mosquitto/certs
+
+cafile etc/mosquitto/certs/ca.crt
+
+keyfile etc/mosquitto/certs/server.key
+
+certificate etc/mosquitto/certs/server.crt
+
+
+
+sudo cp /home/abb/Documents/certificates/server.key /etc/mosquitto/ca_certificates
+
+
+mosquitto_pub --cafile etc/mosquitto/certs/ca.crt --cert etc/mosquitto/certs/client.crt --key etc/mosquitto/certs/client.key -d -h localhost -p 8883 -t etc -m "hello there"
+
+
+
+mosquitto_pub -h localhost -t test -m "hello again" -p 1883 --capath /etc/mosquitto/certs/
+
+
+Restart  : sudo systemctl restart mosquitto
+
+
+
+
+mosquitto -c /etc/mosquitto/mosquitto.conf
+
+
+
+
+
+mosquitto_pub --cafile ca.crt --cert client.crt --key client.key -d -h localhost -p 8883 -t test -m "hello there"
+
+
+
+------------------New scripts------------
+
+openssl req -new -out client2.csr  -key client2.key -subj "/CN=client/O=example.com"
+
+
+openssl x509 -req -in client.csr -CA ca.crt   -CAkey ca.key -CAserial ./ca.srl -out client.crt  -days 3650 -addtrust clientAuth
+
+
+
+------------------------------Dockers Command-----------------
+
+sudo docker exec -it 73d63370d24d sh
+
+sudo docker cp /etc/mosquitto/certs/ca.crt 6459:/ca.crt
+
+
+docker restart 6459
+
+aa
+
+----------------Docker image for port 8885------
+
+sudo docker build -t testconnectbroker .
+
+
+sudo docker run -p 8885:8885 -dit --mount source=mosquitto_test,target=/mosquitto testconnectbroker-2
+
+sudo mosquitto_pub -h localhost -t test -m "hello" --cafile ca.crt --cert client.crt --key client.key -p 8885 
+
+
+
+
+sudo docker run --mount type=bind,source=/var/ability/mosquitto,target=/mosquitto -p 8885:8885 -p 9003:9003 testconnectbrokerwc:10.0
+
+
+=--------Python ------------------------
+
+sudo idle python_file.py
+
+/home/abb/Desktop/Edge/EdgeConnectBroker/certs/ca.crt
+
+
+
+
+--------------------------Read write perminsion
+
+sudo chmod o+r client.pfx
+[sudo] password for abb: 
+abb@administrator-virtual-machine:~/Documents/new_files2$ 
+sudo chmod o+w client.pfx
+ abb@administrator-virtual-machine:~/Documents/new_files2$ 
+sudo chmod o+x client.pfx
+abb@administrator-virtual-machine:~/Documents/new_files2$ 
+sudo chmod g+x client.pfx
+abb@administrator-virtual-machine:~/Documents/new_files2$ 
+sudo chmod g+w client.pfx
+abb@administrator-virtual-machine:~/Documents/new_files2$ sudo chmod g+r  client.pfx
+
+
+
+
+------------Update APT ---------
+
+sudo dpkg -i *.deb
+
+
+
+
+syslog
+{
+port => 10514
+}
+
