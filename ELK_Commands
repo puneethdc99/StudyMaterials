@@ -1,0 +1,75 @@
+sudo service kibana restart
+sudo service elasticsearch restart
+sudo service logstash restart
+sudo service nginx restart
+sudo service rsyslog restart
+
+
+https://devconnected.com/monitoring-linux-logs-with-kibana-and-rsyslog/
+https://www.freeipa.org/page/Howto/Centralised_Logging_with_Logstash/ElasticSearch/Kibana
+
+
+/var/log/nginx/error.log
+
+
+sudo apt install default-jdk
+sudo apt-get update && sudo apt-get install default-jre
+
+	
+
+
+ sudo vim /etc/elasticsearch/elasticsearch.yml
+
+
+sudo apt-get update
+
+sudo vim /etc/kibana/kibana.yml
+
+sudo vim /etc/nginx/sites-available/34.89.89.247
+
+sudo vim /etc/logstash/conf.d/logstash.conf
+
+http://34.89.89.247/status
+
+
+
+localhost:10514 - logstash
+localhost:9200 - elasticsearch
+localhost:5601 - kibana
+
+sudo vim /etc/rsyslog.d/testconfig.conf
+sudo vim /var/log/testconfig/test
+sudo vim /etc/rsyslog.conf
+
+
+https://alexmarquardt.com/2018/11/05/security-tls-ssl-pki-authentication-in-elasticsearch/
+
+
+journalctl -f
+
+https://docs.docker.com/config/containers/logging/journald/
+
+https://github.com/elastic/beats/tree/master/journalbeat
+
+
+docker run --log-driver=syslog --log-opt syslog-address=tcp://localhost:8883 edgeapp
+
+
+docker run --log-driver=journald \
+    --log-opt labels=location \
+    --log-opt env=TEST \
+    --env "TEST=false" \
+    --label location=west \
+    edgeapp
+
+
+
+
+journalctl --since "2 minutes ago"
+sudo journalctl -b CONTAINER_NAME=edgeapp
+
+
+
+
+sudo docker rm --force edgeapp
+sudo docker run --log-driver=journald --name edgeapp edgeapp
