@@ -1,2 +1,2 @@
 # javascript
-Use Links and documents for learning
+Useful Links and documents for learning
