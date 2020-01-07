@@ -1,0 +1,45 @@
+rsyslog config to monitor a file
+
+1) Create a custom config file to define a "Facility" and  monitor a file:
+
+create a file   /etc/rsyslog.d/test.config (any custom name )   
+
+File content -:
+
+module(load="imfile" PollingInterval="2")
+
+input(type="imfile"
+      File="/var/log/test.log"
+      Tag="TestTag"
+      Facility="local0")
+
+test.log is the file to be monitored.
+
+
+2) In order to forward logs from rsyslog, head over to /etc/rsyslog.d and create a new file named 70-output.conf
+
+File Content -: 
+
+# This line sends all lines to defined IP address at port 10514
+# using the json-template format.
+
+local0.*                       @@34.89.89.247:10514;json-template
+
+
+3)  Create a 01-json-template.conf file under  /etc/rsyslog.d , with following content
+
+File Content -:
+
+template(name="json-template"
+  type="list") {
+    constant(value="{")
+      constant(value="\"@timestamp\":\"")     property(name="timereported" dateFormat="rfc3339")
+      constant(value="\",\"@version\":\"1")
+      constant(value="\",\"message\":\"")     property(name="msg" format="json")
+      constant(value="\",\"sysloghost\":\"")  property(name="hostname")
+      constant(value="\",\"severity\":\"")    property(name="syslogseverity-text")
+      constant(value="\",\"facility\":\"")    property(name="syslogfacility-text")
+      constant(value="\",\"programname\":\"") property(name="programname")
+      constant(value="\",\"procid\":\"")      property(name="procid")
+    constant(value="\"}\n")
+} 
