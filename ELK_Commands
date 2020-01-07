@@ -1,3 +1,19 @@
+----------------------------------------------------------------------------------------------
+ELK Installation -:
+
+https://logz.io/learn/complete-guide-elk-stack/#installing-elk
+
+https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elk-stack-on-ubuntu-14-04
+
+Simple Version -  https://medium.com/@salohyprivat/getting-elk-up-and-running-on-linux-server-ca9a177d4024
+
+Using Dockers -  https://logz.io/blog/elk-stack-on-docker/
+
+Syslog-Ng - https://github.com/balabit/syslog-ng
+----------------------------------------------------------------------------------------------------
+
+
+
 sudo service kibana restart
 sudo service elasticsearch restart
 sudo service logstash restart
