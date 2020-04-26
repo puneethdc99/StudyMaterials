@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/39760371/can-i-screenshot-or-printscreen-with-a-console-application-without-excess-refere
+
+https://stackoverflow.com/questions/54174052/c-sharp-screenshot-full-window
