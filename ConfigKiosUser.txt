@@ -1,0 +1,40 @@
+$LogonDomain = "./"
+$User = "Username"
+ 
+ 
+function Set-KioskMode {
+param(
+    [string]$Domain,
+    [string]$UserName
+)
+ 
+$User = "$($Domain)\$($UserName)".TrimStart('\')
+ 
+$nameSpaceName="root\cimv2\mdm\dmmap"
+$className="MDM_AssignedAccess"
+$obj = Get-CimInstance -Namespace $namespaceName -ClassName $className
+ 
+$obj.Configuration = @"
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;AssignedAccessConfiguration
+    xmlns=&quot;http://schemas.microsoft.com/AssignedAccess/2017/config&quot;
+    xmlns:rs5=&quot;http://schemas.microsoft.com/AssignedAccess/201810/config&quot;
+    &gt;
+    &lt;Profiles&gt;
+        &lt;Profile Id=&quot;{AFF9DA33-AE89-4039-B646-3A5706E92957}&quot;&gt;
+            &lt;KioskModeApp AppUserModelId=&quot;Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge&quot;/&gt;
+        &lt;/Profile&gt;
+    &lt;/Profiles&gt;
+    &lt;Configs&gt;
+        &lt;Config&gt;
+            &lt;Account&gt;$($User)&lt;/Account&gt;
+            &lt;DefaultProfile Id=&quot;{AFF9DA33-AE89-4039-B646-3A5706E92957}&quot;/&gt;
+        &lt;/Config&gt;
+    &lt;/Configs&gt;
+&lt;/AssignedAccessConfiguration&gt;
+"@
+ 
+Set-CimInstance -CimInstance $obj
+}
+ 
+Set-KioskMode -Domain $LogonDomain -UserName $User

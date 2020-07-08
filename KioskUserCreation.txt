@@ -1,0 +1,8 @@
+$usrname = 'Kiosk'
+$PlainPassword = "Kiosk0!234"
+$SecurePassword = $PlainPassword | ConvertTo-SecureString -AsPlainText  Force
+New-LocalUser -Name Kiosk -Password $SecurePassword -PasswordNeverExpires  -UserMayNotChangePassword
+Set-AssignedAccess -AppUserModelId Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge -UserName $usrname
+
+
+https://4sysops.com/archives/windows-10-1809-kiosk-mode-with-an-ad-domain-account/
