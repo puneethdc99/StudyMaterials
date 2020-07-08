@@ -10,5 +10,49 @@ for ($num = 1 ; $num -le $noOfUsers ; $num++)
 }
 
 
+if(-not(Test-Path -Path "HKCU:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe"))
+{
+
+            ### This section covers a required registry value for most settings you'd want to change
+            # Create MicrosoftEdge key
+            try {
+                New-Item -Path "HKCU:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge" -type Directory -Force -ErrorAction Stop
+            }
+            catch [System.Exception] {
+                Write-Warning -Message "Unable to create MicrosoftEdge key. Error message: $($_.Exception.Message)"
+            }
+
+            # Create Main key
+            try {
+                New-Item -Path "HKCU:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main" -type Directory -Force -ErrorAction Stop
+            }
+            catch [System.Exception] {
+                Write-Warning -Message "Unable to create Main key. Error message: $($_.Exception.Message)"
+            }
+
+            ### This section is required when enabling the Home Button to be shown
+            # Add HomeButtonEnabled value
+            try {
+                New-ItemProperty -Path "HKCU:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main" -Name HomeButtonEnabled -PropertyType DWORD -Value 1 -Force -ErrorAction Stop
+            }
+            catch [System.Exception] {
+                Write-Warning -Message "Unable to create HomeButtonEnabled value. Error message: $($_.Exception.Message)"
+            }
+
+            # Add HomeButtonPage value
+            try {
+                New-ItemProperty -Path "HKCU:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main" -Name HomeButtonPage -PropertyType String -Value "http://www.google.com" -Force -ErrorAction Stop
+            }
+            catch [System.Exception] {
+                Write-Warning -Message "Unable to create HomeButtonPage value. Error message: $($_.Exception.Message)"
+            }
+            
+
+
+
+
+Ref-
+
+https://github.com/MSEndpointMgr/ConfigMgr/blob/master/Operating%20System%20Deployment/Set-MicrosoftEdgeSetting.ps1
 
 https://4sysops.com/archives/windows-10-1809-kiosk-mode-with-an-ad-domain-account/
