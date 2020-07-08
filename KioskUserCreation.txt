@@ -1,8 +1,14 @@
-$usrname = 'Kiosk'
-$PlainPassword = "Kiosk0!234"
-$SecurePassword = $PlainPassword | ConvertTo-SecureString -AsPlainText  Force
-New-LocalUser -Name Kiosk -Password $SecurePassword -PasswordNeverExpires  -UserMayNotChangePassword
-Set-AssignedAccess -AppUserModelId Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge -UserName $usrname
+[int]$noOfUsers = Read-Host 'Number of Kiosk Users Required?'
+
+
+for ($num = 1 ; $num -le $noOfUsers ; $num++)
+{
+    $usrname = Read-Host 'Enter the UserName?'
+    $password = Read-Host 'What is your password?' -AsSecureString
+    New-LocalUser -Name Kiosk + $num -Password $password -PasswordNeverExpires  -UserMayNotChangePassword
+    Set-AssignedAccess -AppUserModelId Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge -UserName $usrname
+}
+
 
 
 https://4sysops.com/archives/windows-10-1809-kiosk-mode-with-an-ad-domain-account/
