@@ -11,3 +11,6 @@ Enter number 2.
 Go to Advanced power settings (click on Windows button, write power options, click on Power Options, in the selected plan click on the Change plan settings, click on the Change advanced power settings).
 Click on the Change settings that are currently unavailable
 Click Sleep, then System unattended sleep timeout, then change these settings from 2 Minutes to 20 for example.
+
+
+https://superuser.com/questions/954467/windows-10-auto-logout-on-5-minutes-of-inactivity
