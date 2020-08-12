@@ -4,9 +4,9 @@ Windows Registry Editor Version 5.00
 @="URL:Shutdown Protocol"
 "URL Protocol"=""
 
-[HKEY_CLASSES_ROOT\qlive\shell]
+[HKEY_CLASSES_ROOT\shutdown\shell]
 
-[HKEY_CLASSES_ROOT\qlive\shell\open]
+[HKEY_CLASSES_ROOT\shutdown\shell\open]
 
-[HKEY_CLASSES_ROOT\qlive\shell\open\command]
+[HKEY_CLASSES_ROOT\shutdown\shell\open\command]
 @="C:\\Windows\\system32\\shutdown.exe /l /f"
