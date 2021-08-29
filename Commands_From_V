@@ -180,3 +180,15 @@ syslog
 port => 10514
 }
 
+
+
+
+-----------------------------------------------My Commands--------------------------------------------------------
+                        dotnet workload install microsoft-net-sdk-blazorwebassembly-aot
+
+                        npx vsts-npm-auth -config .npmrc
+to remove https error - dotnet dev-certs https --trust
+
+
+
+
